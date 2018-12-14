@@ -1,0 +1,3 @@
+/home/loop/CLionProjects/Compiler_of_Clit/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/loop/CLionProjects/Compiler_of_Clit/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/loop/CLionProjects/Compiler_of_Clit/cmake-build-debug/CMakeFiles/Compiler_of_Clit.dir

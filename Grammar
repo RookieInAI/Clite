@@ -1,0 +1,158 @@
+程序：= 声明序列
+<PROGRAM> = <DE_LIST>
+声明序列：= 结构体或函数声明 声明序列
+<DE_LIST> = <STR_FUNC_DE> <DE_LIST>
+结构体或函数声明：= 结构体声明 | 函数声明
+<STR_FUNC_DE> = <STR_DE> | <FUNC_DE>
+结构体声明：= STRUCT 标识符 左大括号 局部变量声明序列 右大括号 分号
+<STR_DE> = struct <IDS> LC <LOC_VAR_DE_LIST> RC SEMI
+函数声明：= 类型 标识符 左小括号 参数表 右小括号 语句块
+<FUNC_DE> = <TYPE> <IDS> LP <PRA_LIST> RP <STA_BLOCK>
+类型：= char
+     | int
+     | float
+     | bool
+     | 结构体类型
+<TYPE> =  char |int |float |bool |<STR_TYPE>
+<STR_TYPE> = struct <IDS>
+
+结构体类型：= STRUCT 标识符
+
+参数表：= 变量说明 追加变量说明
+<PAR_LIST> = <PAR_VAR> <PAR_VAR_PLUS>
+追加变量说明：= 逗号 参数表
+<PAR_VAR_PLUS> = COMMA <PAR_LIST>
+变量说明：= 类型 标识符
+<PAR_VAT> = <TYPE> <IDS>
+语句块：= 左大括号 局部变量声明序列 语句序列 右大括号
+<STA_BLOCK> = LC <LOC_VAR_DE_LIST> <STA_LIST> RC
+语句序列：= 语句 语句序列
+？？        |空
+<STA_LIST> = <STA> <STALIST> | BLANK
+
+语句：= 表达式 分号
+     | RETURN 表达式 分号
+     | 语句块
+     | IF 左小括号 表达式 右小括号 语句 ELSE语句
+     | WHILE 左小括号 表达式 右小括号 语句
+     | 变量 = 表达式
+<STA> = <EXP> SEMI
+       | return <EXP> SEMI
+       | <STA_BLOCK>
+       | if LP <EXP> RP <STA> <ELSE_STA>
+       | while LP <EXP> RP <STA>
+
+<ELSE_STA> = else <STA>
+           | BLANK
+
+ ELSE语句：=  ELSE 语句
+          | 空
+
+局部变量声明序列：= 变量声明语句 局部变量声明序列
+？？               | 空
+
+<LOC_VAT_DE_LIST> = <STA_VAR_DE> <LOC_VAR_DE_LIST>
+                  | BLANK
+
+变量声明语句：= 类型 变量序列 分号
+
+<STA_VAR_LIST> = <TYPE> <VAR_LIST> SEMI
+变量序列：= 变量 追加变量序列
+<VAR_LIST> = <VAR> <VAR_LIST_PLUS>
+追加变量序列：=  空
+？？            | 逗号 变量序列
+<VAR_LIST_PLUS> = COMMA <VAR_LIST>
+变量：= 标识符 数组变量
+<VAR> = <IDS> <VAR_ARR_PLUS>
+数组变量：= 左中括号 表达式 右中括号
+         |取成员符号 变量
+         |空
+<VAR_ARR_PLUS> = LB <EXP> RB
+               | STOP <VAR>
+               | BLANK
+
+
+<SUB_SUB_EXP> = NINT
+              | REAL
+              | BOOL
+              | <IDS> <IDS_PLUS>
+              | CHAR
+
+标识符可附加部分：=
+          | 取成员符号 变量
+          | 左小括号 右小括号
+          | 左小括号 参数序列 右小括号
+          | 空
+          | 左中括号 表达式 右中括号
+<IDS_PLUS> = LP RP
+           | STOP <VAR>
+           | LP <PARS> RP
+           | BLANK
+           | LB <EXP> RB
+
+
+<S_EXP> = <SUB_S_EXP> <SUB_S_EXP_PLUS>
+<SUB_S_EXP_PLUS> = PLUS <SUB_S_EXP> <SUB_S_EXP_PLUS>
+                 | MINUS <SUB_S_EXP> <SUB_S_EXP_PLUS>
+                 | BLANK
+<SUB_S_EXP> = <SUB_SUB_S_EXP> <SUB_SUB_S_EXP_PLUS>
+<SUB_SUB_S_EXP_PLUS> = STAR <SUB_SUB_S_EXP> <SUB_SUB_S_EXP_PLUS>
+                     | DIV <SUB_SUB_S_EXP> <SUB_SUB_S_EXP_PLUS>
+                     | BLANK
+<SUB_SUB_S_EXP> = LP <S_EXP> RP
+                |<IDS> <IDS_PLUS>
+                |<NINT>
+                |<REAL>
+                |<CHAR>
+算术表达式：= 次级算术表达式 追加次级表达
+追加次级表达式：=  + 次级算术表达式 追加次级表达式
+             |  - 次级算术表达式 追加次级表达式
+             | 空
+
+次级算术表达式：= 次次级算术表达式 追加次次级算术表达式
+追加次次级算术表达式：= * 次次级算术表达式 追加次次级算术表达式
+                   |/ 次次级算术表达式 追加次次级算术表达式
+                   |空
+次次级算术表达式：= （算术表达式）
+               |标识符 标识符可附加部分
+               |NINT
+               |REAL
+               |CHAR
+
+
+<B_EXP> = <SUB_B_EXP> <SUB_B_EXP_PLUS>
+<SUB_B_EXP_PLUS> = AND <SUB_B_EXP> <SUB_B_EXP_PLUS>
+                 | OR <SUB_B_EXP> <SUB_B_EXP_PLUS>
+                 | BLANK
+<SUB_B_EXP> = <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+<SUB_SUB_B_EXP_PLUS> = GREATER <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+                     | LESS <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+                     | GREATER_EQU <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+                     | LESS_EQU <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+                     | EQU <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+                     | NOT_EQU <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+                     | BLANK
+<SUB_SUB_B_EXP> = LP <B_EXP> RP
+                | BOOL
+                | <IDS> <IDS_PLUS>
+
+
+布尔表达式：= 布尔表达式 与　次级布尔表达式
+　　　　　：= 布尔表达式　或　次级布尔表达式
+次级布尔表达式　：＝ 算术表达式 < 算术表达式
+                 算术表达式 > 算术表达式
+                 -- == --
+                 -- ！= --
+                 -- 《= --
+                 -- 》= --+
+
+表达式 ：= 算术表达式
+        | 布尔表达式
+<EXP> = <S_EXP>|<B_EXP>
+
+参数序列：=表达式 追加参数序列
+<PARS> = <EXP> <PARS_PLUS>
+追加参数序列：=逗号 参数序列
+            | 空
+<PARS_PLUS> = COMMA <PARS>
+            | BLANK

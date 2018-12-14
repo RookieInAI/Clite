@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Compiler_of_Clit.dir/main.cpp.o CMakeFiles/Compiler_of_Clit.dir/Clite_lex.cpp.o CMakeFiles/Compiler_of_Clit.dir/SymTable.cpp.o CMakeFiles/Compiler_of_Clit.dir/Clite_parse.cpp.o  -o Compiler_of_Clit 

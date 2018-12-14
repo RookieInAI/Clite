@@ -1,0 +1,14 @@
+Struct aaa{
+    int s;
+    char c;
+};
+int main(){
+   int a;
+   struct aaa c[5];
+    if (a||b){
+        a+b==0;
+        a+b(a);
+    }
+    else
+    ;
+}

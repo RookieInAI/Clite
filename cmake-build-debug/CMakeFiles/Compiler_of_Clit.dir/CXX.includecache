@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/loop/CLionProjects/Compiler_of_Clit/Clite_lex.h
+string
+-
+vector
+-
+set
+-
+iostream
+-
+
+/home/loop/CLionProjects/Compiler_of_Clit/Clite_parse.cpp
+Clite_parse.h
+/home/loop/CLionProjects/Compiler_of_Clit/Clite_parse.h
+
+/home/loop/CLionProjects/Compiler_of_Clit/Clite_parse.h
+map
+-
+set
+-
+string
+-
+stack
+-
+vector
+-
+fstream
+-
+iostream
+-
+Clite_lex.h
+/home/loop/CLionProjects/Compiler_of_Clit/Clite_lex.h
+iomanip
+-
+

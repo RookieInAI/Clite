@@ -1,0 +1,100 @@
+<PROGRAM> = <DE_LIST>
+
+<DE_LIST> = <STR_FUNC_DE> <DE_LIST>
+           |BLANK
+
+<STR_FUNC_DE> = <STR_DE> | <FUNC_DE>
+
+<STR_DE> = struct <IDS> LC <LOC_VAR_DE_LIST> RC SEMI
+
+<FUNC_DE> = <TYPE> <IDS> LP <PRA_LIST> RP <STA_BLOCK>
+
+<TYPE> =  char |int |float |bool |<STR_TYPE>
+
+<STR_TYPE> = struct <IDS>
+
+<PAR_LIST> = <PAR_VAR> <PAR_VAR_PLUS>
+
+<PAR_VAR_PLUS> = COMMA <PAR_LIST>
+
+<PAR_VAT> = <TYPE> <IDS>
+
+<STA_BLOCK> = LC <LOC_VAR_DE_LIST> <STA_LIST> RC
+
+<STA_LIST> = <STA> <STALIST> | BLANK
+
+<STA> = <EXP> SEMI
+       | return <EXP> SEMI
+       | <STA_BLOCK>
+       | if LP <B_EXP> RP <STA> <ELSE_STA>
+       | while LP <B_EXP> RP <STA>
+
+<ELSE_STA> = else <STA>
+           | BLANK
+
+<LOC_VAT_DE_LIST> = <STA_VAR_DE> <LOC_VAR_DE_LIST>
+                  | BLANK
+
+<STA_VAR_LIST> = <TYPE> <VAR_LIST> SEMI
+
+<VAR_LIST> = <VAR> <VAR_LIST_PLUS>
+
+<VAR_LIST_PLUS> = COMMA <VAR_LIST>
+
+<VAR> = <IDS> <VAR_ARR_PLUS>
+
+<VAR_ARR_PLUS> = LB <S_EXP> RB
+               | STOP <VAR>
+               | BLANK
+
+
+<SUB_SUB_EXP> = NINT
+              | REAL
+              | BOOL
+              | <IDS> <IDS_PLUS>
+              | CHAR
+
+<IDS_PLUS> = LP RP
+           | STOP <VAR>
+           | LP <PARS> RP
+           | BLANK
+           | LB <S_EXP> RB
+
+
+<S_EXP> = <SUB_S_EXP> <SUB_S_EXP_PLUS>
+<SUB_S_EXP_PLUS> = PLUS <SUB_S_EXP> <SUB_S_EXP_PLUS>
+                 | MINUS <SUB_S_EXP> <SUB_S_EXP_PLUS>
+                 | BLANK
+<SUB_S_EXP> = <SUB_SUB_S_EXP> <SUB_SUB_S_EXP_PLUS>
+<SUB_SUB_S_EXP_PLUS> = STAR <SUB_SUB_S_EXP> <SUB_SUB_S_EXP_PLUS>
+                     | DIV <SUB_SUB_S_EXP> <SUB_SUB_S_EXP_PLUS>
+                     | BLANK
+<SUB_SUB_S_EXP> = LP <S_EXP> RP
+                |<IDS> <IDS_PLUS>
+                |<NINT>
+                |<REAL>
+                |<CHAR>
+
+<B_EXP> = <SUB_B_EXP> <SUB_B_EXP_PLUS>
+
+<SUB_B_EXP_PLUS> = AND <SUB_B_EXP> <SUB_B_EXP_PLUS>
+                 | OR <SUB_B_EXP> <SUB_B_EXP_PLUS>
+                 | BLANK
+<SUB_B_EXP> = <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+
+<SUB_SUB_B_EXP_PLUS> = GREATER <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+                     | LESS <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+                     | GREATER_EQU <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+                     | LESS_EQU <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+                     | EQU <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+                     | NOT_EQU <SUB_SUB_B_EXP> <SUB_SUB_B_EXP_PLUS>
+                     | BLANK
+
+<SUB_SUB_B_EXP> = LP <B_EXP> RP
+                | BOOL
+                | <IDS> <IDS_PLUS>
+
+<PARS> = <EXP> <PARS_PLUS>
+
+<PARS_PLUS> = COMMA <PARS>
+            | BLANK
